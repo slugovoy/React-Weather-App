@@ -6,16 +6,16 @@ const api = {
 };
 
 function App() {
-  const [query, setQuery] = useState("");
-  const [weather, setWeather] = useState({});
+  const [cityName, setCityName] = useState("");
+  const [currentWeather, setCurrentWeather] = useState({});
 
   const search = (event) => {
     if (event.key === "Enter") {
-      fetch(`${api.base}weather?q=${query}&units=imperial&APPID=${api.key}`)
+      fetch(`${api.base}weather?q=${cityName}&units=imperial&APPID=${api.key}`)
         .then((res) => res.json())
         .then((result) => {
-          setWeather(result);
-          setQuery("");
+          setCurrentWeather(result);
+          setCityName("");
           console.log(result);
         });
     }
@@ -54,27 +54,33 @@ function App() {
     return `${day} ${date} ${month} ${year}`;
   };
   return (
-    <div className={(typeof weather.main != "undefined") ? ((weather.main.temp >= 50) ? "app warm" : "app") : "app"}>
+    <div className={(typeof currentWeather.main != "undefined") ? ((currentWeather.main.temp >= 50 & currentWeather.weather[0].main === "Mist") ? "app mist" 
+    : (currentWeather.main.temp > 49 & currentWeather.weather[0].main === "Clear") ? "app warm" 
+    : (currentWeather.main.temp >= 50 & currentWeather.weather[0].main === "Rain") ? "app rain" 
+    : (currentWeather.main.temp < 50 & currentWeather.weather[0].main === "Clear") ? "app" 
+    : (currentWeather.main.temp >= 50 & currentWeather.weather[0].main === "Clouds" || currentWeather.main.temp < 50 & currentWeather.weather[0].main === "Clouds") ? "app clouds" 
+    : "app"
+    ) : "app"}>
       <main>
         <div className="search-box">
           <input
             type="text"
             className="search-bar"
             placeholder="Search..."
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
+            onChange={(e) => setCityName(e.target.value)}
+            value={cityName}
             onKeyPress={search}
           />
         </div>
-        {typeof weather.main != "undefined" ? (
+        {typeof currentWeather.main != "undefined" ? (
           <div>
             <div className="location-box">
-              <div className="location">{weather.name}, </div>
+              <div className="location">{currentWeather.name}, {currentWeather.sys.country}</div>
               <div className="date">{dateBuilder(new Date())}</div>
             </div>
             <div className="weather-box">
-              <div className="temp">{Math.round(weather.main.temp)}°F</div>
-              <div className="weather">{weather.weather[0].main}</div>
+              <div className="temp">{Math.round(currentWeather.main.temp)}°F</div>
+              <div className="weather">{currentWeather.weather[0].main}</div>
             </div>
           </div>
         ) : (
