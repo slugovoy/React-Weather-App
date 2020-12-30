@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const api = {
   key: API_KEY,
@@ -21,38 +23,46 @@ function App() {
     }
   };
 
-  const dateBuilder = (d) => {
-    let months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+  // const dateBuilder = (d) => {
+  //   let months = [
+  //     "January",
+  //     "February",
+  //     "March",
+  //     "April",
+  //     "May",
+  //     "June",
+  //     "July",
+  //     "August",
+  //     "September",
+  //     "October",
+  //     "November",
+  //     "December",
+  //   ];
+  //   let days = [
+  //     "Sunday",
+  //     "Monday",
+  //     "Tuesday",
+  //     "Wednesday",
+  //     "Thursday",
+  //     "Friday",
+  //     "Saturday",
+  //   ];
 
-    let day = days[d.getDay()];
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let year = d.getFullYear();
+  //   let day = days[d.getDay()];
+  //   let date = d.getDate();
+  //   let month = months[d.getMonth()];
+  //   let year = d.getFullYear();
 
-    return `${day} ${date} ${month} ${year}`;
-  };
+  //   return `${day} ${date} ${month} ${year}`;
+  // };
+
+
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const unixTime = currentWeather.dt;
+  const currentDate = new Date(unixTime*1000);
+  const dateToday = currentDate.toLocaleDateString("en-US", options)
+
+
   return (
     <div className={(typeof currentWeather.main != "undefined") ? ((currentWeather.main.temp >= 50 & currentWeather.weather[0].main === "Mist") ? "app mist" 
     : (currentWeather.main.temp > 49 & currentWeather.weather[0].main === "Clear") ? "app warm" 
@@ -76,7 +86,7 @@ function App() {
           <div>
             <div className="location-box">
               <div className="location">{currentWeather.name}, {currentWeather.sys.country}</div>
-              <div className="date">{dateBuilder(new Date())}</div>
+              <div className="date">{dateToday}</div>
             </div>
             <div className="weather-box">
               <div className="temp">{Math.round(currentWeather.main.temp)}°F</div>
