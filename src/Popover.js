@@ -21,7 +21,7 @@ const popover = (
 
 const Instructions = () => (
   <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-    <Button className="btn" variant="success" size="lg">
+    <Button className="btn">
       Instructions
     </Button>
   </OverlayTrigger>
