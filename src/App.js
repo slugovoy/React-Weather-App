@@ -5,6 +5,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.css"
+import fiveDayForecast from "./FiveDayForecast"
+import SecondCall from "./FiveDayForecast";
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const api = {
@@ -15,7 +17,7 @@ const api = {
 function App() {
   const [cityName, setCityName] = useState("");
   const [currentWeather, setCurrentWeather] = useState({});
-  const [fiveDayForecast, setFiveDayForecast] = useState({});
+  // const [fiveDayForecast, setFiveDayForecast] = useState({});
 
   const search = (event) => {
     if (event.key === "Enter") {
@@ -97,15 +99,7 @@ function App() {
           ""
         )}
       </main>
-      <Container fluid>
-        <Row>
-          <Col sm={true}>sm=true</Col>
-          <Col sm={true}>sm=true</Col>
-          <Col sm={true}>sm=true</Col>
-          <Col sm={true}>sm=true</Col>
-          <Col sm={true}>sm=true</Col>
-        </Row>
-      </Container>
+      <SecondCall />
     </div>
   );
 }

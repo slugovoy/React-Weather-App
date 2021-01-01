@@ -1,3 +1,4 @@
+# Project is not completely done yet but you can checkout the first step here https://blooming-sands-04803.herokuapp.com/
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
