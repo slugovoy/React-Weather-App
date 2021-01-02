@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Instructions from "./Popover";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "./index.css"
-import fiveDayForecast from "./FiveDayForecast"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
+import fiveDayForecast from "./FiveDayForecast";
 import SecondCall from "./FiveDayForecast";
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
@@ -41,6 +41,15 @@ function App() {
   const unixTime = currentWeather.dt;
   const currentDate = new Date(unixTime * 1000);
   const dateToday = currentDate.toLocaleDateString("en-US", options);
+
+
+// let fiveDay;
+//   if (currentWeather ==! "undefined") {
+//     for (let i = 0; i < 1; i++) {
+//       fiveDay = <SecondCall props={currentWeather} />
+      
+//     }
+//   }
 
   return (
     <div
@@ -99,7 +108,12 @@ function App() {
           ""
         )}
       </main>
-      <SecondCall />
+      {typeof currentWeather.main !== "undefined" && fiveDayForecast == {} 
+      ? (
+        <SecondCall props={currentWeather} />)
+        : ("") 
+        }
+        
     </div>
   );
 }
