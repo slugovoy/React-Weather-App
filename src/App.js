@@ -5,8 +5,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import fiveDayForecast from "./FiveDayForecast";
-import SecondCall from "./FiveDayForecast";
+import fiveDayForecast   from "./FiveDayForecast";
+import SecondCall   from "./FiveDayForecast";
+
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const api = {
@@ -50,6 +51,7 @@ function App() {
       
 //     }
 //   }
+// console.log(fiveDayForecast)
 
   return (
     <div
@@ -108,7 +110,7 @@ function App() {
           ""
         )}
       </main>
-      {typeof currentWeather.main !== "undefined" && fiveDayForecast == {} 
+      {typeof currentWeather.main !== "undefined" 
       ? (
         <SecondCall props={currentWeather} />)
         : ("") 
