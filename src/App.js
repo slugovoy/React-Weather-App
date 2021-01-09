@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Instructions from "./Popover";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import fiveDayForecast   from "./FiveDayForecast";
-import SecondCall   from "./FiveDayForecast";
-
+import SecondCall from "./FiveDayForecast";
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const api = {
@@ -16,22 +11,31 @@ const api = {
 };
 
 function App() {
-  const [cityName, setCityName] = useState("");
-  const [currentWeather, setCurrentWeather] = useState({});
-  // const [fiveDayForecast, setFiveDayForecast] = useState({});
+  const [cityName, setCityName] = useState("Denver");
+  const [weather, setWeather] = useState({});
 
-  const search = (event) => {
-    if (event.key === "Enter") {
-      fetch(`${api.base}weather?q=${cityName}&units=imperial&APPID=${api.key}`)
-        .then((res) => res.json())
-        .then((result) => {
-          setCurrentWeather(result);
-          setCityName("");
-          console.log(result, "Hi");
-        });
-    }
-    // secondCall();
-  };
+  async function getWeather() {
+    let currentWeather = await fetch(
+      `${api.base}weather?q=${cityName}&units=imperial&APPID=${api.key}`
+    );
+    currentWeather = await currentWeather.json();
+
+    console.log(currentWeather);
+
+    let lat = currentWeather.coord.lat;
+    let lon = currentWeather.coord.lon;
+
+    let fiveDayForecast = await fetch(
+      `${api.base}onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=imperial&APPID=${api.key}`
+    );
+    fiveDayForecast = await fiveDayForecast.json();
+
+    console.log(fiveDayForecast);
+    setWeather({ currentWeather, fiveDayForecast });
+    setCityName("");
+  }
+
+  const { currentWeather, fiveDayForecast } = weather;
 
   const options = {
     weekday: "long",
@@ -39,24 +43,14 @@ function App() {
     month: "long",
     day: "numeric",
   };
-  const unixTime = currentWeather.dt;
-  const currentDate = new Date(unixTime * 1000);
-  const dateToday = currentDate.toLocaleDateString("en-US", options);
-
-
-// let fiveDay;
-//   if (currentWeather ==! "undefined") {
-//     for (let i = 0; i < 1; i++) {
-//       fiveDay = <SecondCall props={currentWeather} />
-      
-//     }
-//   }
-// console.log(fiveDayForecast)
-
+  
+  // const unixTime = currentWeather.dt;
+  // const currentDate = new Date(unixTime * 1000);
+  // const dateToday = currentDate.toLocaleDateString("en-US", options);
   return (
     <div
       className={
-        typeof currentWeather.main != "undefined"
+        typeof currentWeather != "undefined"
           ? currentWeather.weather[0].main === "Mist"
             ? "app mist"
             : (currentWeather.main.temp > 49) &
@@ -85,19 +79,23 @@ function App() {
             placeholder="Type city name here..."
             onChange={(e) => setCityName(e.target.value)}
             value={cityName}
-            onKeyPress={search}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                getWeather();
+              }
+            }}
           />
         </div>
         <div className="instructions">
           <Instructions />
         </div>
-        {typeof currentWeather.main != "undefined" ? (
+        {typeof currentWeather != "undefined" ? (
           <div>
             <div className="location-box">
               <div className="location">
                 {currentWeather.name}, {currentWeather.sys.country}
               </div>
-              <div className="date">{dateToday}</div>
+              <div className="date">{}</div>
             </div>
             <div className="weather-box">
               <div className="temp">
@@ -109,13 +107,14 @@ function App() {
         ) : (
           ""
         )}
+      <div className="forecast">
+      {typeof currentWeather !== "undefined" ? (
+        <SecondCall props={fiveDayForecast} />
+      ) : (
+        ""
+      )}
+      </div>
       </main>
-      {typeof currentWeather.main !== "undefined" 
-      ? (
-        <SecondCall props={currentWeather} />)
-        : ("") 
-        }
-        
     </div>
   );
 }
