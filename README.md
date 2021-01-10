@@ -1,71 +1,74 @@
-# Project is not completely done yet but you can checkout the first step here https://blooming-sands-04803.herokuapp.com/
-# Getting Started with Create React App
+# React-Weather-App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+React-Weather-App is an application  that gives the  user weather information based on his/her input. 
+
+Checkout the [Deployed app here](https://blooming-sands-04803.herokuapp.com/).
+
+## Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Technologies](#technologies)
+* [Scripts](#Scripts)
+* [Contributing](#contributing)
+* [License](#license)
+* [Questions](#questions)
+
+## Installation
+
+You don't need to install it, just simply go to this [Link](https://blooming-sands-04803.herokuapp.com/) or, if your prefer, copy this link https://blooming-sands-04803.herokuapp.com/ and paste in your browser.
+
+
+## Usage
+
+* Gif:
+
+![Demo]()
+
+
+* Description:
+
+When user inserts city name in `Search` field and press `Return or Enter`, app will display the current weather conditions in that city, including city name, current date, temperature and will change background image depends of whether condition.
+Also, a 5-day forecast for that city is displayed below the current conditions showing similar information.
+You can press `Instructions` button to get them.
+
+## Technologies
+
+This application utilizes `React`, `React Bootstrap`,`Heroku`, `CSS`.
+
+## Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Contributing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-### `npm run build`
+### Steps for contributing
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## License
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Questions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+If you have any questions or concerns, feel free to contact me via:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+GitHub: [slugovoy](https://github.com/slugovoy)
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Email: serg.lugovoy.81@gmail.com
