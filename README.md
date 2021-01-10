@@ -23,7 +23,7 @@ You don't need to install it, just simply go to this [Link](https://blooming-san
 
 * Gif:
 
-![Demo]()
+![Demo](./public/weatherGif.gif)
 
 
 * Description:
