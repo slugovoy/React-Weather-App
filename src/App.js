@@ -11,7 +11,7 @@ const api = {
 };
 
 function App() {
-  const [cityName, setCityName] = useState("Denver");
+  const [cityName, setCityName] = useState("");
   const [weather, setWeather] = useState({});
 
   async function getWeather() {
@@ -37,16 +37,39 @@ function App() {
 
   const { currentWeather, fiveDayForecast } = weather;
 
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const dateBuilder = (d) => {
+    let months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    let days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    let day = days[d.getDay()];
+    let date = d.getDate();
+    let month = months[d.getMonth()];
+    let year = d.getFullYear();
+
+    return `${day} ${date} ${month} ${year}`;
   };
   
-  // const unixTime = currentWeather.dt;
-  // const currentDate = new Date(unixTime * 1000);
-  // const dateToday = currentDate.toLocaleDateString("en-US", options);
   return (
     <div
       className={
@@ -95,7 +118,7 @@ function App() {
               <div className="location">
                 {currentWeather.name}, {currentWeather.sys.country}
               </div>
-              <div className="date">{}</div>
+              <div className="date">{dateBuilder(new Date())}</div>
             </div>
             <div className="weather-box">
               <div className="temp">
